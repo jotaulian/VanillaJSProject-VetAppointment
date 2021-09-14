@@ -18,7 +18,6 @@ class Citas {
 
     agregarCita(cita){
         this.citas = [...this.citas, cita];
-        console.log(this.citas);
     }
 }
 
@@ -45,6 +44,60 @@ class UI {
         setTimeout(() => {
             divMensaje.remove();
         }, 3000);
+    }
+
+    imprimirCitas({citas}) //Hacemos el destructuring directamente desde donde van los parametros:
+    {
+        this.limpiarHTML();
+
+        citas.forEach(cita => {
+            //Por cada cita en el array hará lo siguiente:
+            const { mascota, propietario, telefono, fecha, hora, sintomas, id} = cita;
+            const divCita = document.createElement('div');
+            divCita.classList.add('cita', 'p-2');
+            divCita.dataset.id = id;
+
+            // Scripting de los elementos de la cita:
+            const mascotaParrafo = document.createElement('h3');
+            mascotaParrafo.classList.add('card-title', 'font-weight-bolder');
+            mascotaParrafo.textContent = mascota;
+
+            const propietarioParrafo = document.createElement('p');
+            propietarioParrafo.innerHTML = `
+            <span class="font-weight-bolder">Propietario:</span> ${propietario}
+            `;
+
+            const telefonoParrafo = document.createElement('p');
+            telefonoParrafo.innerHTML = `
+            <span class="font-weight-bolder">Teléfono:</span> ${telefono}
+            `;
+            const fechayhoraParrafo = document.createElement('p');
+            fechayhoraParrafo.innerHTML = `
+            <span class="font-weight-bolder">Fecha:</span> ${fecha} |
+            <span class="font-weight-bolder">Hora:</span> ${hora}
+            `;
+            const sintomasParrafo = document.createElement('p');
+            sintomasParrafo.innerHTML = `
+            <span class="font-weight-bolder">Síntomas:</span> ${sintomas}
+            `;
+
+
+            //Agregar a divCita
+            divCita.appendChild(mascotaParrafo);
+            divCita.appendChild(propietarioParrafo);
+            divCita.appendChild(telefonoParrafo);
+            divCita.appendChild(fechayhoraParrafo);
+            divCita.appendChild(sintomasParrafo);
+
+            //Agregamos divCita al HTML:
+            contenedorCitas.appendChild(divCita);
+        });
+    }
+
+    limpiarHTML(){
+        while(contenedorCitas.firstChild){
+            contenedorCitas.removeChild(contenedorCitas.firstChild);
+        }
     }
 }
 
@@ -106,7 +159,7 @@ function nuevaCita(e){
     formulario.reset();
 
     //Mostrar el HTML con los datos de la cita:
-    
+    ui.imprimirCitas(administrarCitas);
 }
 
 function reiniciarObjeto(){
