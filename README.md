@@ -2,7 +2,7 @@
 
 JS project using Bootstrap and some OOP.
 
-You can check the project throw the following link: https://cranky-heisenberg-31bd70.netlify.app/
+You can check the project throw the following link: [https://cranky-heisenberg-31bd70.netlify.app/](https://veterinaria-bookings.netlify.app/)
 
 ![Website look](/img/Ejemplo.png)
 ![Website look](/img/Ejemplo2.png)
